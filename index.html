@@ -4,70 +4,139 @@
 	<title>Crystal Collector</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="game.js"></script>
 	
 
 </head>
 <body>
-	<div class="box">
-	<div class="textHeading">
-	<h1>Number to achieve: <span id="target-Number"></span></h1>
-	<h1>Your Score: <span id="Score"></span></h1>
+	<h1 class="Heading">Crystal Collector</h1>
+
+	
+	<div class="boxLeft">
+		<div class="textHeading">
+			<h1>Target: <span id="target-Number"></span></h1>
+			<h2>Score: <span id="Score"></span></h2>
+		</div>
+		<div id="crystalImg" class="crystalBox">
+			<ul class="iconList">
+				<li class="icon"><img id="crystalVal1" class="crystals" src="assets/images/star.png"></li>
+				<li class="icon"><img id="crystalVal2" class="crystals" src="assets/images/black-hole.png"></li>
+				<li class="icon"><img id="crystalVal3" class="crystals" src="assets/images/solar-system.png"></li>
+				<li class="icon"><img id="crystalVal4" class="crystals" src="assets/images/sun.png"></li>
+			</ul>
+
+		</div>
+
 	</div>
-	<div id="crystalImg" class="crystalBox">
-		<ul class="iconList">
-		<li class="icon"><img id="crystalVal1" class="crystals" src="assets/images/star.png"></li>
-		<li class="icon"><img id="crystalVal2" class="crystals" src="assets/images/black-hole.png"></li>
-		<li class="icon"><img id="crystalVal3" class="crystals" src="assets/images/solar-system.png"></li>
-		<li class="icon"><img id="crystalVal4" class="crystals" src="assets/images/sun.png"></li>
-		</ul>
+	<div class="boxScore">
+		<h2>Games Played: <span id="gameCounter"></span></h2>
+		<h2>Wins: <span id="winCounter"></span></h2>
+		<h2>Losses: <span id="loseCounter"></span></h2>
+
 		
-	</div>
+
 
 	</div>
 	<script type="text/javascript">
-		var randomNum = Math.floor(Math.random() * (90 - 20 + 1)) + 20;
-		$("#target-Number").text(randomNum);
+		$(document).ready(function(){
 
-		var counter = 0;
+			var winCounter = 0;
+			var loseCounter = 0;
+			var gameCounter = 0;
+
+			var randomNum = Math.floor(Math.random() * (50 - 20 + 1)) + 20;
+			$("#target-Number").text(randomNum);
+
+			var counter = 0;
+			var arr = [];
+			arr.length = 0;
+			while(arr.length < 4){
+				var randomnumber = Math.floor(Math.random()*9) + 1;
+				if(arr.indexOf(randomnumber) > -1) continue;
+				arr[arr.length] = randomnumber;
+			}
+			console.log(arr + " first");
 
 
+			function newImgVal (){
+			$("#crystalVal1").attr("value" , arr[0]);
+			$("#crystalVal2").attr("value" , arr[1]);
+			$("#crystalVal3").attr("value" , arr[2]);
+			$("#crystalVal4").attr("value" , arr[3]);
+			}
+
+			newImgVal();
+
+
+
+			$(".crystals").on("click", function(){
+				var crystalValue = ($(this).attr("value"));
+				
+				crystalValue = parseInt(crystalValue);
+				counter += crystalValue;
+				$("#Score").text(counter);
+
+
+				if (randomNum == counter){
+					alert("You Win!");
+
+					winCounter++;
+					$("#winCounter").text(winCounter);
+					gameCounter ++;
+					$("#gameCounter").text(gameCounter);
+					
+					reset();
+					
+				}
+
+
+				else if (counter > randomNum){
+
+					alert("You Lose! Try again!");
+
+					loseCounter++;
+					$("#loseCounter").text(loseCounter);
+					gameCounter ++;
+					$("#gameCounter").text(gameCounter);
+					reset();
+					
+				}
+
+			})
 		
-		var arr = [];
-		while(arr.length < 4){
-			var randomnumber = Math.floor(Math.random()*9) + 1;
-			if(arr.indexOf(randomnumber) > -1) continue;
-			arr[arr.length] = randomnumber;
-		}
 
-		$("#crystalVal1").attr("value" , arr[0]);
-		$("#crystalVal2").attr("value" , arr[1]);
-		$("#crystalVal3").attr("value" , arr[2]);
-		$("#crystalVal4").attr("value" , arr[3]);
-		
 
-		$(".crystals").on("click", function(){
-			var crystalValue = ($(this).attr("value"));
-			console.log(crystalValue);
-			crystalValue = parseInt(crystalValue);
-			counter += crystalValue;
-			$("#Score").text(counter);
-		
+			function reset(){
+				
+				randomNum = 0;
+				randomNum = Math.floor(Math.random() * (50 - 20 + 1)) + 20;
+				$("#target-Number").text(randomNum);
 
-		if (randomNum == counter){
-			alert("You Win!");
-			location.reload();
+				counter = 0;
 
-		}
+				$("#Score").text(counter);
+				arr = [];
+				arr.length = 0;
+				while(arr.length < 4){
+					var randomnumber = Math.floor(Math.random()*9) + 1;
+					if(arr.indexOf(randomnumber) > -1) continue;
+					arr[arr.length] = randomnumber;					
+				}
 
-		else if (counter > randomNum){
+				console.log(arr + " second");
+				newImgVal();
 
-			alert("You Lose! Try again!");
-			location.reload();
-		}
+
+			}
+
+
 		})
 
+
+
+		
 
 
 
