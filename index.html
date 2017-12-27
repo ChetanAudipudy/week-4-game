@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crystal Collector</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	
+
+</head>
+<body>
+	<div class="box">
+	<div class="textHeading">
+	<h1>Number to achieve: <span id="target-Number"></span></h1>
+	<h1>Your Score: <span id="Score"></span></h1>
+	</div>
+	<div id="crystalImg" class="crystalBox">
+		<ul class="iconList">
+		<li class="icon"><img id="crystalVal1" class="crystals" src="assets/images/star.png"></li>
+		<li class="icon"><img id="crystalVal2" class="crystals" src="assets/images/black-hole.png"></li>
+		<li class="icon"><img id="crystalVal3" class="crystals" src="assets/images/solar-system.png"></li>
+		<li class="icon"><img id="crystalVal4" class="crystals" src="assets/images/sun.png"></li>
+		</ul>
+		
+	</div>
+
+	</div>
+	<script type="text/javascript">
+		var randomNum = Math.floor(Math.random() * (90 - 20 + 1)) + 20;
+		$("#target-Number").text(randomNum);
+
+		var counter = 0;
+
+
+		
+		var arr = [];
+		while(arr.length < 4){
+			var randomnumber = Math.floor(Math.random()*9) + 1;
+			if(arr.indexOf(randomnumber) > -1) continue;
+			arr[arr.length] = randomnumber;
+		}
+
+		$("#crystalVal1").attr("value" , arr[0]);
+		$("#crystalVal2").attr("value" , arr[1]);
+		$("#crystalVal3").attr("value" , arr[2]);
+		$("#crystalVal4").attr("value" , arr[3]);
+		
+
+		$(".crystals").on("click", function(){
+			var crystalValue = ($(this).attr("value"));
+			console.log(crystalValue);
+			crystalValue = parseInt(crystalValue);
+			counter += crystalValue;
+			$("#Score").text(counter);
+		
+
+		if (randomNum == counter){
+			alert("You Win!");
+			location.reload();
+
+		}
+
+		else if (counter > randomNum){
+
+			alert("You Lose! Try again!");
+			location.reload();
+		}
+		})
+
+
+
+
+	</script>
+
+
+</body>
+</html>

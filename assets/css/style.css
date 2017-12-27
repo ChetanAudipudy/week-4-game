@@ -1,0 +1,72 @@
+body{
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-image: url(http://www.misucell.com/data/out/9/IMG_353346.jpg);
+	background-size: cover;
+	font-family: 'Unica One', cursive;
+	font-size: 20px;
+
+	
+}
+.crystalBox{
+
+	width: auto;
+	
+
+}
+.iconList{
+
+
+	display: flex;
+ 	flex-direction: row;
+	
+
+}
+.iconList .icon{
+
+	margin: 30px;
+}
+
+ .crystals{
+ 	width: 150px;
+ 	height: 150px;
+ 		
+ }
+
+
+ 
+.box{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 1000px;
+	height: 400px;
+	padding: 40px;
+	background: rgba(0,0,0,.2);
+	box-sizing: border-box;
+	box-shadow: 0 15px 25px rgba(0,0,0,.5);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	
+
+}
+
+.h1{
+	font-size: 30px;
+	 font-weight: bold;
+}
+
+.textHeading {
+
+	height: 60px;
+	display: flex;
+	flex-direction: column;
+	line-height: 35px;
+}
